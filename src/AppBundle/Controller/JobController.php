@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\FilterType\Model\ListFilter;
 use AppBundle\Form\FilterType\Model\JobFilter;
+use AppBundle\Form\Type\JobType;
 use Knp\Component\Pager\Pagination\AbstractPagination;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -80,6 +81,29 @@ class JobController extends AbstractApiController
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($job);
+            $em->flush();
+
+            return $this->returnViewResponse($job, Response::HTTP_CREATED);
+        }
+
+        return $this->returnViewResponse($this->getErrors($form), Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @param Request $request
+     * @param Job $job
+     * @return Response
+     *
+     * @Route("/{id}")
+     * @Method("PUT")
+     */
+    public function putAction(Request $request, Job $job)
+    {
+        $form = $this->createForm(JobType::class, $job, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $em->flush();
 
             return $this->returnViewResponse($job, Response::HTTP_CREATED);

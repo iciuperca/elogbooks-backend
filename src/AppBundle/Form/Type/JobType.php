@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Job;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,6 +17,11 @@ class JobType extends AbstractApiType
     {
         $builder
             ->add('description', null, [])
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    Job::STATUS_OPEN, Job::STATUS_DONE
+                ]
+            ])
         ;
     }
 
