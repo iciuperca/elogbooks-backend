@@ -127,38 +127,5 @@ class User
     {
         return $this->email;
     }
-
-    /**
-     * Add job
-     *
-     * @param Job $job
-     *
-     * @return User
-     */
-    public function addJob(Job $job)
-    {
-        $this->jobs[] = $job;
-
-        return $this;
-    }
-
-    /**
-     * Remove job
-     *
-     * @param Job $job
-     */
-    public function removeJob(Job $job)
-    {
-        $this->jobs->removeElement($job);
-    }
-
-    /**
-     * Get jobs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getJobs()
-    {
-        return $this->jobs;
-    }
 }
+

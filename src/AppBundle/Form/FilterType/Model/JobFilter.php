@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form\FilterType\Model;
 
+use AppBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class JobFilter
@@ -83,6 +84,12 @@ class JobFilter
      * @Assert\Type(type="string")
      */
     protected $description;
+
+    /**
+     * @var int
+     * @Assert\Type(type="int")
+     */
+    protected $user;
 
     /**
     *
@@ -338,6 +345,24 @@ class JobFilter
     {
         $this->serialisationGroups = $serialisationGroups;
 
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param int $user
+     * @return JobFilter
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
         return $this;
     }
 }

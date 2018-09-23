@@ -27,6 +27,7 @@ class JobFilterType extends AbstractApiType
             ->add('description',null,[])
             ->add('customer',null,[])
             ->add('priority',null,[])
+            ->add('user',null,[])
         ;
     }
 

@@ -57,6 +57,14 @@ class JobRepository extends EntityRepository
             ->andWhere(sprintf(" j.customer = %d ", $listFilterModel->getCustomer()));
         }
 
+        if($listFilterModel->getUser())
+        {
+          $qb
+            ->andWhere(" j.user = :user ")
+              ->setParameter('user', $listFilterModel->getUser())
+          ;
+        }
+
         if($listFilterModel->getStatus())
         {
             $qb

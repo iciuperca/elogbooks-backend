@@ -37,6 +37,16 @@ class Job
     protected $description;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="jobs");
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"default"})
+     */
+    protected $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="integer")
@@ -45,16 +55,6 @@ class Job
      * @JMS\Groups({"default", "list"})
      */
     protected $status = self::STATUS_OPEN;
-
-    /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="jobs");
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"default", "list"})
-     */
-    protected $user;
 
     /**
      * @return int
@@ -100,29 +100,5 @@ class Job
     {
         $this->status = $status;
         return $this;
-    }
-
-    /**
-     * Set user
-     *
-     * @param User $user
-     *
-     * @return Job
-     */
-    public function setUser(User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }
